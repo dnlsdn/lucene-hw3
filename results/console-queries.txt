@@ -1,0 +1,12 @@
+nome graphics
+nome comp.sys.mac.hardware
+nome politics -guns
+nome slipstream
+contenuto "boundary layer" transition detect
+contenuto shock-induced "boundary layer" separation
+contenuto +buckling "cylindrical shells" imperfections
+contenuto "heat transfer" "stagnation point" blunt
+contenuto "panel flutter" "elastic restraint"~1
+contenuto hockey "stanley cup"
+contenuto encryption +clipper
+contenuto "space shuttle" -orbit

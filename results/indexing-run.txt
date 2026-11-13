@@ -1,0 +1,5 @@
+Indexing 20246 .txt files from data/docs
+Analyzers: nome=filename, contenuto=english
+Indexed 20246 files (37,3 MB) in 2,84 s: 7125 docs/s, 13,1 MB/s
+  reading files 0,34 s, addDocument 2,28 s, commit 0,19 s
+Index size on disk: 36,5 MB, 2 segments, in index

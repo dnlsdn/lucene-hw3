@@ -1,0 +1,8 @@
+target/
+index/
+data/raw/
+data/docs/
+.DS_Store
+.idea/
+*.iml
+.vscode/
