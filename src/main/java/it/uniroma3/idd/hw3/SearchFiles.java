@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.Locale;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -42,7 +43,7 @@ public final class SearchFiles {
              DirectoryReader reader = DirectoryReader.open(dir);
              BufferedReader in = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
             IndexSearcher searcher = new IndexSearcher(reader);
-            System.out.printf("Index: %d documents. Syntax: nome|contenuto <terms>, \"...\" for a phrase.%n",
+            System.out.printf(Locale.ROOT, "Index: %d documents. Syntax: nome|contenuto <terms>, \"...\" for a phrase.%n",
                     reader.numDocs());
             while (true) {
                 System.out.print("> ");
@@ -71,13 +72,13 @@ public final class SearchFiles {
         TopDocs top = searcher.search(query, TOP_K);
         double ms = (System.nanoTime() - t0) / 1e6;
         System.out.printf("  Lucene query: %s%n", query);
-        System.out.printf("  %d matching documents (%.1f ms)%n", top.totalHits.value(), ms);
+        System.out.printf(Locale.ROOT, "  %d matching documents (%.1f ms)%n", top.totalHits.value(), ms);
 
         StoredFields stored = searcher.storedFields();
         int rank = 1;
         for (ScoreDoc hit : top.scoreDocs) {
             Document doc = stored.document(hit.doc);
-            System.out.printf("  %2d. %7.3f  %s%n", rank++, hit.score, doc.get(Analyzers.NAME_FIELD));
+            System.out.printf(Locale.ROOT, "  %2d. %7.3f  %s%n", rank++, hit.score, doc.get(Analyzers.NAME_FIELD));
             System.out.printf("               %s%n", snippet(doc.get(Analyzers.CONTENT_FIELD)));
         }
         System.out.println();

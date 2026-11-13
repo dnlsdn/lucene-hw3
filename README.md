@@ -60,6 +60,33 @@ java -jar target/lucene-hw3.jar index
 > contenuto "panel flutter" "elastic restraint"~1
 ```
 
+Example session (first three results of each query; the full output of the twelve test queries
+is in [`results/console-session.txt`](results/console-session.txt)):
+
+```
+Index: 20246 documents. Syntax: nome|contenuto <terms>, "..." for a phrase.
+> contenuto "boundary layer" transition detect
+  Lucene query: contenuto:"boundari layer" contenuto:transit contenuto:detect
+  707 matching documents (6.8 ms)
+   1.  12.989  cran-1205_effects-of-cooling-on-boundary-layer-transition-on-a-hemi-sphere-in.txt
+               effects of cooling on boundary layer transition on a hemi- sphere in simulated hypersonic flow . an ...
+   2.  12.794  cran-0272_oscillatory-aerodynamic-coefficients-for-a-unified-supersonic.txt
+               oscillatory aerodynamic coefficients for a unified supersonic hypersonic strip theory . the shock tu...
+   3.  12.157  cran-0009_transition-studies-and-skin-friction-measurements-on-an-insulated-flat.txt
+               transition studies and skin friction measurements on an insulated flat plate at a mach number of 5.8...
+
+> nome slipstream
+  Lucene query: nome:slipstream
+  2 matching documents (0.2 ms)
+   1.   2.980  cran-1064_propeller-slipstream-effects-as-determined-from-wing-pressure.txt
+               propeller slipstream effects as determined from wing pressure distribution on a large-scale six-prop...
+   2.   2.820  cran-1144_slipstream-flow-around-several-tilt-wing-vtol-aircraft-models.txt
+               slipstream flow around several tilt-wing vtol aircraft models operating near the ground . a collecti...
+```
+
+The `Lucene query` line shows what the analyzer did to the terms: `boundary` became the Porter stem
+`boundari`, and the quoted words became a phrase query on adjacent positions.
+
 The first word chooses the field (`nome` or `contenuto`), the rest is read by Lucene's classic
 `QueryParser`: quotes make a phrase query, `+` requires a term, `-` excludes it, `~n` sets the slop.
 Without a field keyword both fields are searched. An empty line ends the program.
